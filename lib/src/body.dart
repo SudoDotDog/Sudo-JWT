@@ -10,4 +10,8 @@ class JWTBody {
       map: map,
     );
   }
+
+  dynamic getValue(String key) {
+    return this.map[key];
+  }
 }
