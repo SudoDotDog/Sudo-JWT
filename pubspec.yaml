@@ -1,7 +1,6 @@
 name: sudo_jwt
 description: A new Flutter package project.
 version: 1.0.0
-author: WMXPY
 homepage: https://sudo.dog
 
 environment:
