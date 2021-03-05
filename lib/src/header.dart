@@ -1,3 +1,8 @@
+DateTime _parseTime(int time) {
+  final int millisecondsTime = time * 1000;
+  return DateTime.fromMillisecondsSinceEpoch(millisecondsTime);
+}
+
 class JWTHeader {
   final String algorithm;
   final String type;
@@ -40,14 +45,11 @@ class JWTHeader {
       algorithm: rawALG != null ? rawALG.toString() : null,
       type: rawTYP != null ? rawTYP.toString() : null,
       audiance: rawAUD != null ? rawAUD.toString() : null,
-      expireationTime:
-          rawEXP != null ? DateTime.fromMillisecondsSinceEpoch(rawEXP) : null,
+      expireationTime: rawEXP != null ? _parseTime(rawEXP) : null,
       id: rawJTI != null ? rawJTI.toString() : null,
-      issuedAt:
-          rawIAT != null ? DateTime.fromMillisecondsSinceEpoch(rawIAT) : null,
+      issuedAt: rawIAT != null ? _parseTime(rawIAT) : null,
       issuer: rawISS != null ? rawISS.toString() : null,
-      notBefore:
-          rawNBF != null ? DateTime.fromMillisecondsSinceEpoch(rawNBF) : null,
+      notBefore: rawNBF != null ? _parseTime(rawNBF) : null,
       subject: rawSUB != null ? rawSUB.toString() : null,
       map: map,
     );
