@@ -10,6 +10,8 @@ class JWTHeader {
   final DateTime notBefore;
   final String subject;
 
+  final Map<String, dynamic> map;
+
   JWTHeader({
     this.algorithm,
     this.type,
@@ -20,6 +22,7 @@ class JWTHeader {
     this.issuer,
     this.notBefore,
     this.subject,
+    this.map,
   });
 
   factory JWTHeader.fromMap(Map<String, dynamic> map) {
@@ -46,6 +49,7 @@ class JWTHeader {
       notBefore:
           rawNBF != null ? DateTime.fromMillisecondsSinceEpoch(rawNBF) : null,
       subject: rawSUB != null ? rawSUB.toString() : null,
+      map: map,
     );
   }
 }
