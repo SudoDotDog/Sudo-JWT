@@ -5,10 +5,10 @@ import 'package:sudo_jwt/src/header.dart';
 import 'package:sudo_jwt/src/util.dart';
 
 class JWTToken {
-  final String raw;
-  final JWTHeader header;
-  final JWTBody body;
-  final String signature;
+  final String? raw;
+  final JWTHeader? header;
+  final JWTBody? body;
+  final String? signature;
 
   JWTToken({
     this.raw,
@@ -40,10 +40,10 @@ class JWTToken {
   }
 
   dynamic getHeader(String key) {
-    return this.header.getValue(key);
+    return this.header!.getValue(key);
   }
 
   dynamic getBody(String key) {
-    return this.body.getValue(key);
+    return this.body!.getValue(key);
   }
 }
