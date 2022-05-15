@@ -73,7 +73,7 @@ class JWTHeader {
   }
 
   bool verifyNotBeforeWithCurrentTime() {
-    return verifyNotBefore(DateTime.now());
+    return this.verifyNotBefore(DateTime.now());
   }
 
   bool verifyIssueDate(DateTime currentTime) {
@@ -90,7 +90,7 @@ class JWTHeader {
   }
 
   bool verifyIssueDateWithCurrentTime() {
-    return verifyIssueDate(DateTime.now());
+    return this.verifyIssueDate(DateTime.now());
   }
 
   bool verifyExpiration(DateTime currentTime) {
@@ -107,16 +107,16 @@ class JWTHeader {
   }
 
   bool verifyExpirationWithCurrentTime() {
-    return verifyExpiration(DateTime.now());
+    return this.verifyExpiration(DateTime.now());
   }
 
   bool verifyTime(DateTime currentTime) {
-    return verifyNotBefore(currentTime) &&
-        verifyIssueDate(currentTime) &&
-        verifyExpiration(currentTime);
+    return this.verifyNotBefore(currentTime) &&
+        this.verifyIssueDate(currentTime) &&
+        this.verifyExpiration(currentTime);
   }
 
   bool verifyTimeWithCurrentTime() {
-    return verifyTime(DateTime.now());
+    return this.verifyTime(DateTime.now());
   }
 }
