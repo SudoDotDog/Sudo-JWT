@@ -8,11 +8,29 @@ void main() {
   test('instantiate token by jwt', () {
     final JWTToken token = JWTToken.fromToken(mockToken);
 
-    expect(token.header.algorithm, "RS256");
+    expect(token.header.algorithm, "HS256");
     expect(token.header.type, "JWT");
-    expect(token.header.issuedAt!.toIso8601String(), "2018-01-17T19:30:22.000");
 
     expect(token.getBody('name'), "John Doe");
-    expect(token.getBody('admin'), true);
+    expect(token.verifyTimeWithCurrentTime(), true);
+  });
+
+  test('verify expire date - happy path', () {
+    final JWTToken token = JWTToken.fromToken(mockTokenExpiration100YearsLater);
+
+    expect(token.verifyNotBeforeWithCurrentTime(), true);
+    expect(token.verifyIssueDateWithCurrentTime(), true);
+    expect(token.verifyExpirationWithCurrentTime(), true);
+    expect(token.verifyTimeWithCurrentTime(), true);
+  });
+
+  test('verify expire date - sad path', () {
+    final JWTToken token =
+        JWTToken.fromToken(mockTokenExpiration100YearsEarlier);
+
+    expect(token.verifyNotBeforeWithCurrentTime(), true);
+    expect(token.verifyIssueDateWithCurrentTime(), true);
+    expect(token.verifyExpirationWithCurrentTime(), false);
+    expect(token.verifyTimeWithCurrentTime(), false);
   });
 }
