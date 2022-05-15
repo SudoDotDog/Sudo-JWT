@@ -75,4 +75,48 @@ class JWTHeader {
   bool verifyNotBeforeWithCurrentTime() {
     return verifyNotBefore(DateTime.now());
   }
+
+  bool verifyIssueDate(DateTime currentTime) {
+    if (this.issuedAt == null) {
+      return true;
+    }
+
+    if (this.issuedAt is DateTime) {
+      return currentTime.millisecondsSinceEpoch >=
+          this.issuedAt!.millisecondsSinceEpoch;
+    }
+
+    return false;
+  }
+
+  bool verifyIssueDateWithCurrentTime() {
+    return verifyIssueDate(DateTime.now());
+  }
+
+  bool verifyExpiration(DateTime currentTime) {
+    if (this.expirationTime == null) {
+      return true;
+    }
+
+    if (this.expirationTime is DateTime) {
+      return currentTime.millisecondsSinceEpoch <=
+          this.expirationTime!.millisecondsSinceEpoch;
+    }
+
+    return false;
+  }
+
+  bool verifyExpirationWithCurrentTime() {
+    return verifyExpiration(DateTime.now());
+  }
+
+  bool verifyTime(DateTime currentTime) {
+    return verifyNotBefore(currentTime) &&
+        verifyIssueDate(currentTime) &&
+        verifyExpiration(currentTime);
+  }
+
+  bool verifyTimeWithCurrentTime() {
+    return verifyTime(DateTime.now());
+  }
 }
