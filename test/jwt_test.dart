@@ -33,4 +33,23 @@ void main() {
     expect(token.verifyExpirationWithCurrentTime(), false);
     expect(token.verifyTimeWithCurrentTime(), false);
   });
+
+  test('verify not before date - happy path', () {
+    final JWTToken token =
+        JWTToken.fromToken(mockTokenNotBefore100YearsEarlier);
+
+    expect(token.verifyNotBeforeWithCurrentTime(), true);
+    expect(token.verifyIssueDateWithCurrentTime(), true);
+    expect(token.verifyExpirationWithCurrentTime(), true);
+    expect(token.verifyTimeWithCurrentTime(), true);
+  });
+
+  test('verify not before date - sad path', () {
+    final JWTToken token = JWTToken.fromToken(mockTokenNotBefore100YearsLater);
+
+    expect(token.verifyNotBeforeWithCurrentTime(), false);
+    expect(token.verifyIssueDateWithCurrentTime(), true);
+    expect(token.verifyExpirationWithCurrentTime(), true);
+    expect(token.verifyTimeWithCurrentTime(), false);
+  });
 }

@@ -1,7 +1,12 @@
+## 1.0.0
+
+- First Major Release
+
 ## 2.0.0
 
 - Null sound safety support
 
-## 1.0.0
+## 2.1.0
 
-- First Major Release
+- Add time verify support
+- Improve null sound safety
