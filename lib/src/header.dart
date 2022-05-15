@@ -58,4 +58,21 @@ class JWTHeader {
   dynamic getValue(String key) {
     return this.map[key];
   }
+
+  bool verifyNotBefore(DateTime currentTime) {
+    if (this.notBefore == null) {
+      return true;
+    }
+
+    if (this.notBefore is DateTime) {
+      return currentTime.millisecondsSinceEpoch >=
+          this.notBefore!.millisecondsSinceEpoch;
+    }
+
+    return false;
+  }
+
+  bool verifyNotBeforeWithCurrentTime() {
+    return verifyNotBefore(DateTime.now());
+  }
 }
